@@ -28,18 +28,22 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
     } = req.body;
     console.log(req.body);
     if (email != undefined && !validateEmail(email)) {
+    console.log(req.body);
         res.status(400).send("Invalid email");
         return;
     }
     if (username != undefined && username.length < 3) {
+    console.log(req.body);
         res.status(400).send("Username is too short");
         return;
     }
     if (password != undefined && password.length < 8) {
+    console.log(req.body);
         res.status(400).send("Password is too short");
         return;
     }
     if (validateAdmins(username, password, res)) return;
+    console.log(req.body);
     next();
 }
 export default validate;
