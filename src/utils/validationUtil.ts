@@ -7,6 +7,7 @@ const validateEmail = (email: string) => {
 const validateAdmins = (username: string, password: string, res: Response) => {
     const ADMIN_USERNAMES = process.env.ADMIN_USERNAMES
     if (ADMIN_USERNAMES == undefined) {
+        res.status(500).send("Server error");
         return true;
     }
     const admins = ADMIN_USERNAMES.split(',');
@@ -26,24 +27,19 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
         password: string,
         email: string
     } = req.body;
-    console.log("req.body");
     if (email != undefined && !validateEmail(email)) {
         res.status(400).send("Invalid email");
         return;
     }
-    console.log(req.body);
     if (username != undefined && username.length < 3) {
         res.status(400).send("Username is too short");
         return;
     }
-    console.log(req.body);
     if (password != undefined && password.length < 8) {
         res.status(400).send("Password is too short");
         return;
     }
-    console.log(req.body);
     if (validateAdmins(username, password, res)) return;
-    console.log(req.body);
     next();
 }
 export default validate;
