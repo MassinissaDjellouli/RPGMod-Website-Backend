@@ -8,7 +8,7 @@ import { initMiddleware } from './utils/middlewareUtil';
 import adminController from './controllers/adminController';
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 const start = async () => {
   if(PORT == null || PORT == undefined) {
