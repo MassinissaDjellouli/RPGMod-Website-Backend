@@ -44,12 +44,12 @@ export const validateUserAfterDB = async (user: IUser | undefined, body: any, re
         res.status(404).json({err: "wrongEmail"});
         return true;
     }
-    if (!user.confirmedEmail) {
-        res.status(403).json({err: "unconfirmedEmail"});
-        return true;
-    }
     if (!await bcrypt.compare(body.password, user.password)) {
         res.status(403).json({err: "password"});
+        return true;
+    }
+    if (!user.confirmedEmail) {
+        res.status(403).json({err: "unconfirmedEmail"});
         return true;
     }
     return false;
