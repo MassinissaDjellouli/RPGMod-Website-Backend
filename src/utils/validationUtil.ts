@@ -26,7 +26,7 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
         password: string,
         email: string
     } = req.body;
-    console.log(req.body);
+    console.log("req.body");
     if (email != undefined && !validateEmail(email)) {
     console.log(req.body);
         res.status(400).send("Invalid email");
