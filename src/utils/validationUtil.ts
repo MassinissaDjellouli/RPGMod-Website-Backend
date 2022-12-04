@@ -43,6 +43,7 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
     }
     console.log(req.body);
     if (validateAdmins(username, password, res)) return;
+    console.log(req.body);
     next();
 }
 export default validate;
