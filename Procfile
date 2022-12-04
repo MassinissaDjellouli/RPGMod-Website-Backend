@@ -1,1 +1,1 @@
-web: node src/backend.ts
+web: nodemon
