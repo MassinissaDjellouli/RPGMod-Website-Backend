@@ -24,11 +24,17 @@ export const inscription = async (req: Request, res: Response) => {
 }
 
 export const login = async (req: Request, res: Response) => {
+    console.log("1")
     if (validateUserBeforeDB(req.body, res)) return;
+    console.log("2")
     const response = await doDBOperation<IUser>("getUser", req.body);
+    console.log("3")
     if (handleError(response, res)) return;
+    console.log("4")
     const user: IUser | undefined = response as IUser | undefined;
+    console.log("5")
     if (await validateUserAfterDB(user, req.body, res)) return;
+    console.log("6")
     res.json(generateToken(user as IUser));
 }
 
