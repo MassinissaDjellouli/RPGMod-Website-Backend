@@ -58,7 +58,6 @@ export const getUser = async (req: Request, res: Response) => {
     const response = await doDBOperation<IUser>("getUser", user);
     if (response == undefined) {
         res.status(404).json({err: "userNotFound"});
-        console.log("User not found");
         return;
     }
     if (isApiError(response)) {
@@ -75,9 +74,7 @@ export const uploadStats = async (req: Request, res: Response) => {
 }
 
 export const confirmEmail = async (req: Request, res: Response) => {
-    console.log("confirmEmail");
     const resp = await doDBOperation<IUser>("getUser", req.body);
-    console.log(req.body);
     if (resp == undefined) {
         res.sendStatus(404);
         return;
@@ -112,7 +109,6 @@ export const getModVersionsPerUpdate = async (req: Request, res: Response) => {
 export const getModDownload = async (req: Request, res: Response) => {
     const version = await doDBOperation<IModVersions>("getModVersion", req.params.version);
     if (version == undefined || isApiError(version)) {
-        console.log(version)
         res.status(404).json({err: "modNotFound"});
         return;
     }

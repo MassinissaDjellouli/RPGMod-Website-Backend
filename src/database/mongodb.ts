@@ -63,12 +63,10 @@ const getModVersion = async (version: string) => {
     } as IModVersions;
 }
 const updateModVersion = async (version: IModVersions) => {
-    console.log(version)
     if (version == undefined) {
         return undefined;
     }
     const res = await modVersions.findOneAndUpdate({version: version.version}, {$set: version});
-    console.log(res)
 }
 
 const doDBOperation = async <ExpectedReturn>(operation: string, data?: any): Promise<ExpectedReturn | IAPIError | undefined> => {
@@ -179,9 +177,7 @@ const transaction = async <DataType>(callback: Function, data?: DataType): Promi
             return toReturn;
         }
         await session.commitTransaction();
-        console.log("Transaction committed");
     } catch (err) {
-        console.log(err)
         await session.abortTransaction();
         return {err: "transactionAborted"} as IAPIError;
 
