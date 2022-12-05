@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt';
 export const createUser = async (body: any): Promise<IUser> => {
     return {
         id: undefined,
-        username: body.username,
+        username: body.username.toLowerCase(),
         password: await bcrypt.hash(body.password, 10),
-        email: body.email,
+        email: body.email.toLowerCase(),
         confirmedEmail: false,
         linkedWorlds: [],
         creationDate: new Date().toLocaleDateString(),
